@@ -1,0 +1,451 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kiro 101 — Student setup guide · Supabase edition</title><style>
+:root{--ink:#241b35;--purple:#7040cf;--muted:#655d72;--line:#ded7ea;--bg:#f8f6fc}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+.toolbar{background:#241b35;color:white;padding:18px 28px;display:flex;gap:24px;justify-content:space-between;align-items:center}.toolbar span{font-size:14px}.toolbar button{background:white;color:#241b35;border:0;padding:9px 15px;border-radius:4px;cursor:pointer}
+.layout{display:grid;grid-template-columns:250px minmax(0,950px);gap:48px;max-width:1320px;margin:36px auto;padding:0 28px 80px}nav{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto;font-size:14px}nav strong{display:block;margin-bottom:12px}nav a{display:block;padding:7px 0;color:var(--muted);text-decoration:none;line-height:1.4}nav a:hover{color:var(--purple)}main{min-width:0;background:white;padding:40px 48px;border:1px solid var(--line)}h1{font-size:42px;line-height:1.15;letter-spacing:-1px;margin-top:0}h2{font-size:27px;line-height:1.3;color:var(--purple);border-top:1px solid var(--line);padding-top:30px;margin-top:44px}h3{font-size:21px;margin-top:28px}a{color:#6231b9;text-underline-offset:3px}p,li{overflow-wrap:anywhere}li{margin:7px 0}code{font:0.9em ui-monospace,Consolas,monospace;background:#f1edf8;padding:2px 5px;border-radius:3px}pre{position:relative;background:#251e32;color:#f5efff;padding:22px 20px;overflow:auto;line-height:1.6;border-radius:5px}pre code{background:none;padding:0;font-size:14px;white-space:pre}.copy{position:absolute;right:8px;top:8px;border:1px solid #88789a;color:white;background:#3b304b;padding:3px 8px;border-radius:3px;cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;margin:20px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.55}th,td{border-bottom:1px solid var(--line);text-align:left;vertical-align:top;padding:12px 14px}th{background:#eee8f8;color:#49217f}th:first-child,td:first-child{min-width:160px}blockquote{border-left:4px solid var(--purple);margin:20px 0;padding:2px 18px;background:var(--bg)}input[type=checkbox]{margin-right:6px}ul.contains-task-list{padding-left:0;list-style:none}hr{border:0;border-top:1px solid var(--line)}
+@media(max-width:1000px){.layout{grid-template-columns:1fr;gap:20px;margin-top:20px}nav{position:static;max-height:220px;border-bottom:1px solid var(--line);padding-bottom:16px}main{padding:28px}h1{font-size:34px}}
+@media(max-width:540px){body{font-size:16px}.toolbar{padding:14px 18px}.toolbar span{display:none}.layout{padding:0 12px 40px}main{padding:24px 18px}h1{font-size:31px}h2{font-size:24px}th,td{padding:9px 10px;font-size:14px}pre{padding:36px 14px 18px}}
+@media print{body{background:white;font-size:10.5pt;line-height:1.5}.toolbar,nav,.copy{display:none!important}.layout{display:block;max-width:none;margin:0;padding:0}main{border:0;padding:0}h1{font-size:27pt}h2{font-size:17pt;page-break-after:avoid;margin-top:24px;padding-top:16px}h3{page-break-after:avoid}pre{background:#f2eef8;color:#241b35;white-space:pre-wrap}pre code{white-space:pre-wrap;font-size:9pt}table{font-size:9pt}tr,pre{break-inside:avoid}a{color:#49217f}.table-wrap{overflow:visible} @page{size:A4;margin:18mm}}
+</style></head><body><header class="toolbar"><strong>Kiro 101 · Student setup</strong><span>Supabase edition 1.0.0</span><button onclick="window.print()">Print / Save as PDF</button></header><div class="layout"><nav aria-label="Guide contents"><strong>On this page</strong><a href="#start-here-use-the-supabase-edition">Start here: use the Supabase edition</a><a href="#what-runs-where">What runs where?</a><a href="#before-you-begin">Before you begin</a><a href="#step-1-install-kiro-ide">Step 1 — Install Kiro IDE</a><a href="#step-2-install-node-js-24">Step 2 — Install Node.js 24</a><a href="#step-3-download-and-extract-the-kit">Step 3 — Download and extract the kit</a><a href="#step-4-open-the-correct-folder-in-kiro">Step 4 — Open the correct folder in Kiro</a><a href="#step-5-create-your-own-free-supabase-project">Step 5 — Create your own free Supabase project</a><a href="#step-6-create-the-workshop-database">Step 6 — Create the workshop database</a><a href="#step-7-choose-the-workshop-email-setting">Step 7 — Choose the workshop email setting</a><a href="#step-8-set-the-local-app-address">Step 8 — Set the local app address</a><a href="#step-9-add-your-supabase-connection-values">Step 9 — Add your Supabase connection values</a><a href="#step-10-install-the-app-s-packages">Step 10 — Install the app's packages</a><a href="#step-11-start-the-frontend-and-check-the-connection">Step 11 — Start the frontend and check the connection</a><a href="#step-12-create-your-workshop-app-account">Step 12 — Create your workshop app account</a><a href="#step-13-write-a-post-and-check-that-it-was-saved">Step 13 — Write a post and check that it was saved</a><a href="#step-14-optional-check-a-second-user">Step 14 — Optional: check a second user</a><a href="#step-15-open-your-first-kiro-chat">Step 15 — Open your first Kiro chat</a><a href="#stop-today-and-restart-next-time">Stop today and restart next time</a><a href="#troubleshooting">Troubleshooting</a><a href="#ready-for-workshop-checklist">Ready-for-workshop checklist</a><a href="#official-help">Official help</a></nav><main><h1 id="kiro-101-set-up-your-workshop-app">Kiro 101: set up your workshop app</h1><p><strong>Student guide · Supabase edition 1.0.0 · 26 October 2026</strong></p>
+<p>You will run a small social-posting app on your laptop and connect it to your own free Supabase cloud project. When you finish, you should be able to create an app account, log in, write a post and see it again after refreshing the browser.</p>
+<p>Allow <strong>45–60 minutes for a first setup</strong>, depending on downloads and account creation. This is a planning estimate. Keep this guide open while you work.</p>
+<h2 id="start-here-use-the-supabase-edition">Start here: use the Supabase edition</h2><p>Download the kit from <strong><a href="https://tinyurl.com/kiro-demo-startupkit">tinyurl.com/kiro-demo-startupkit</a></strong> when your facilitator tells you it is ready.</p>
+<p><strong>Check the extracted files before continuing.</strong> The folder you open must contain <code>supabase/schema.sql</code>, <code>frontend/</code>, and this guide. The Supabase edition is packaged as <code>Kiro_Supabase_Startup_Kit.zip</code>, containing a folder named <code>kiro-workshop-supabase</code>.</p>
+<p>If the download instead contains AWS deployment scripts, <code>backend/</code> and <code>infrastructure/</code>, ask your facilitator for the updated <strong>Supabase edition</strong>. That is the original AWS kit and these connection steps will not work with it. The ZIP&#39;s display name may stay <code>kiro-workshop-assets.zip</code> after the facilitator replaces the download; check its contents.</p>
+<h2 id="what-runs-where">What runs where?</h2><pre><code class="language-text">YOUR LAPTOP                         YOUR SUPABASE CLOUD PROJECT
+Kiro + Node.js + the web app  ────►  Login service + database + access rules
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Meaning in this workshop</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frontend</td>
+<td>The app screens you open in your browser</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>The cloud services that handle login and save data</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>Software that runs the app&#39;s local development tools</td>
+</tr>
+<tr>
+<td>npm</td>
+<td>The tool installed with Node.js that downloads the app&#39;s required packages</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td>A command box where you enter the commands in this guide</td>
+</tr>
+<tr>
+<td>Supabase project</td>
+<td>Your own cloud database and login service</td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>Instructions that create the database tables and access rules</td>
+</tr>
+<tr>
+<td>Publishable key</td>
+<td>A browser-safe project key; database rules still control data access</td>
+</tr>
+</tbody></table>
+<p>Each student uses a <strong>separate Supabase project</strong>. You will initially see your own project&#39;s posts, not your classmates&#39; posts.</p>
+<h2 id="before-you-begin">Before you begin</h2><p>Have these ready:</p>
+<ul>
+<li>A Windows, macOS or Linux laptop with internet access and permission to install software.</li>
+<li>A modern browser, such as Chrome, Edge or Firefox.</li>
+<li>An account for signing in to Kiro and an account for the Supabase dashboard.</li>
+<li>The <strong>Supabase edition</strong> of the startup kit.</li>
+</ul>
+<p>You do not need an AWS account, AWS CLI, Docker, a local database, or a Supabase CLI installation for these steps.</p>
+<h3 id="keep-the-three-sign-ins-clear">Keep the three sign-ins clear</h3><table>
+<thead>
+<tr>
+<th>Sign-in</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kiro account</td>
+<td>Using the AI coding editor</td>
+</tr>
+<tr>
+<td>Supabase dashboard account</td>
+<td>Creating and managing your cloud project</td>
+</tr>
+<tr>
+<td>Workshop app account</td>
+<td>Logging into the Micro Blogging app you will run locally</td>
+</tr>
+</tbody></table>
+<p>They are separate accounts. Use a new password for the workshop app, rather than reusing your university password.</p>
+<h2 id="step-1-install-kiro-ide">Step 1 — Install Kiro IDE</h2><ol>
+<li>Open <a href="https://kiro.dev/downloads/">kiro.dev/downloads</a>.</li>
+<li>Download <strong>Kiro IDE</strong> for your operating system and run the installer.</li>
+<li>Open Kiro. Choose an available sign-in method, such as Google, GitHub or AWS Builder ID.</li>
+<li>Finish the sign-in in your browser, then return to Kiro.</li>
+<li>Importing settings from another editor is optional. You can skip it.</li>
+</ol>
+<p><strong>Check:</strong> Kiro opens and you can reach its welcome screen. If you already installed it, continue.</p>
+<h2 id="step-2-install-node-js-24">Step 2 — Install Node.js 24</h2><ol>
+<li>Open the <a href="https://nodejs.org/en/download">official Node.js download page</a>.</li>
+<li>Install <strong>Node.js 24.x</strong>, including npm. If the page offers a different major version, select version 24 from the version choices or <a href="https://nodejs.org/en/download/archive/v24">version 24 archive</a>.</li>
+<li>Close and reopen Kiro after installation so its terminal can find Node.js.</li>
+<li>In Kiro, select <strong>Terminal → New Terminal</strong>.</li>
+</ol>
+<p>On <strong>Windows PowerShell</strong>, enter these commands one at a time:</p>
+<pre><code class="language-powershell">node --version
+npm.cmd --version
+</code></pre>
+<p>On <strong>macOS or Linux</strong>:</p>
+<pre><code class="language-bash">node --version
+npm --version
+</code></pre>
+<p><strong>Check:</strong> Node prints a version beginning with <code>v24.</code> and npm prints a version number. The kit was checked locally using Node.js 24.19.0 and npm 11.17.0. You do not need those exact patch versions, but use major version 24 for this workshop.</p>
+<p>If a command is not recognised, see troubleshooting before continuing. On Windows, use <code>npm.cmd</code> throughout this guide to avoid PowerShell script-policy issues.</p>
+<h2 id="step-3-download-and-extract-the-kit">Step 3 — Download and extract the kit</h2><ol>
+<li>Open <strong><a href="https://tinyurl.com/kiro-demo-startupkit">the startup-kit download link</a></strong>.</li>
+<li>Choose <strong>Download</strong> in the file page. A ZIP file may not have a browser preview; download it instead of trying to edit it online.</li>
+<li>Create a personal folder called <code>KiroWorkshop</code> on your laptop, outside the ZIP file.</li>
+<li>Extract the ZIP there. On Windows, right-click it and choose <strong>Extract All</strong>. On macOS, double-click it and move the extracted folder into <code>KiroWorkshop</code>.</li>
+<li>Open the extracted folder and look for this structure:</li>
+</ol>
+<pre><code class="language-text">kiro-workshop-supabase/
+├── package.json
+├── package-lock.json
+├── README.md
+├── STUDENT_SETUP_GUIDE.html
+├── frontend/
+│   ├── .env.example
+│   └── src/
+└── supabase/
+    └── schema.sql
+</code></pre>
+<p>Other folders, such as <code>tests/</code>, are included too. They do not need to be opened for setup.</p>
+<p><strong>Check:</strong> You can see <code>package.json</code>, <code>frontend</code> and <code>supabase</code> together. Work in the extracted folder, not inside the compressed ZIP.</p>
+<h2 id="step-4-open-the-correct-folder-in-kiro">Step 4 — Open the correct folder in Kiro</h2><ol>
+<li>In Kiro, choose <strong>File → Open Folder</strong>.</li>
+<li>Select <strong><code>kiro-workshop-supabase</code></strong>: the folder containing the top-level <code>package.json</code> shown above.</li>
+<li>Open <strong>Terminal → New Terminal</strong>.</li>
+<li>Check where the terminal is:</li>
+</ol>
+<p>Windows PowerShell:</p>
+<pre><code class="language-powershell">Get-Location
+Get-ChildItem
+</code></pre>
+<p>macOS/Linux:</p>
+<pre><code class="language-bash">pwd
+ls
+</code></pre>
+<p><strong>Check:</strong> The listing includes <code>frontend</code>, <code>supabase</code>, <code>package.json</code> and <code>package-lock.json</code>. If you see only the files inside <code>frontend</code>, move up one folder with <code>cd ..</code> and check again.</p>
+<p>The commands below start from this <strong>project root folder</strong> unless stated otherwise.</p>
+<h2 id="step-5-create-your-own-free-supabase-project">Step 5 — Create your own free Supabase project</h2><ol>
+<li>Open <a href="https://supabase.com/dashboard">supabase.com/dashboard</a> in your browser and sign in or create an account.</li>
+<li>Create or select an organization on the <strong>Free</strong> plan.</li>
+<li>Choose <strong>New project</strong>.</li>
+<li>Name it something recognisable, such as <code>kiro-101-yourname</code>.</li>
+<li>Create a database password and keep it somewhere safe. You will <strong>not</strong> paste this password into the frontend.</li>
+<li>Choose the region specified by your facilitator, or the nearest available region.</li>
+<li>Check that you are creating a Free-plan project, then create it.</li>
+<li>Wait for the dashboard to show that the project is available.</li>
+</ol>
+<p><strong>Check:</strong> Your project has its own dashboard, including SQL Editor and Authentication.</p>
+<p>If you have reached the free-project limit, ask the facilitator for help. Do not delete an existing project that you still need.</p>
+<h2 id="step-6-create-the-workshop-database">Step 6 — Create the workshop database</h2><p>Run the database setup <strong>before creating your workshop app account</strong>.</p>
+<ol>
+<li>In Kiro, open <code>supabase/schema.sql</code>.</li>
+<li>Select and copy the <strong>whole file</strong>. On Windows/Linux use Ctrl+A then Ctrl+C; on macOS use Cmd+A then Cmd+C.</li>
+<li>In your Supabase project, open <strong>SQL Editor</strong>.</li>
+<li>Create a new query, paste the complete file and select <strong>Run</strong>.</li>
+<li>Wait for completion. You should see a success result with no SQL error. The exact dashboard wording may vary.</li>
+<li>Open <strong>Table Editor</strong> and check for four tables: <code>profiles</code>, <code>posts</code>, <code>likes</code>, and <code>follows</code>. Empty tables are normal.</li>
+</ol>
+<p>The file also creates access rules and helper functions. <strong>Keep Row Level Security enabled.</strong> These rules let signed-in app users read the feed while restricting whose records they can change.</p>
+<p><strong>Check:</strong> All four tables exist and the SQL completed successfully. You can rerun the same file if needed; it preserves existing workshop data.</p>
+<p>If you disabled the Supabase Data API when creating the project, enable it for the <code>public</code> schema using the project&#39;s Data API settings. The app uses that API. <a href="https://supabase.com/docs/guides/getting-started/quickstarts/reactjs">Supabase quickstart reference</a></p>
+<h2 id="step-7-choose-the-workshop-email-setting">Step 7 — Choose the workshop email setting</h2><p>For this <strong>disposable learning project</strong>, the simplest route is to turn off email confirmation before the first app signup. This avoids waiting for confirmation messages during class.</p>
+<ol>
+<li>Open <strong>Authentication</strong> in your Supabase project.</li>
+<li>Find the <strong>Email</strong> provider settings. Depending on the dashboard version, they may appear under <strong>Sign In / Providers</strong> or <strong>Providers</strong>.</li>
+<li>Keep email/password sign-in enabled and allow new signups for the exercise.</li>
+<li>Turn <strong>Confirm email</strong> off and save the change.</li>
+</ol>
+<p><strong>What this means:</strong> A person can create an app account without proving they own the entered email address. Use this choice only for the disposable workshop project. Keep Row Level Security on.</p>
+<p><strong>Check:</strong> Confirm email is off before you create the app account in Step 12. The app still requires a password of at least eight characters. If your project uses stronger password rules, follow them.</p>
+<h3 id="if-your-facilitator-asks-you-to-keep-confirmation-on">If your facilitator asks you to keep confirmation on</h3><p>The kit supports this too. After signup, it will tell you to confirm your email and then log in. Use a real email address you control. Supabase&#39;s built-in email service has recipient restrictions and a small sending allowance, so repeated resends are not a reliable classroom workaround. Ask the facilitator to confirm the email setup if no message arrives. <a href="https://supabase.com/docs/guides/auth/auth-smtp">Email service reference</a></p>
+<h2 id="step-8-set-the-local-app-address">Step 8 — Set the local app address</h2><ol>
+<li>Open <strong>Authentication → URL Configuration</strong> in your Supabase project.</li>
+<li>Set <strong>Site URL</strong> to:</li>
+</ol>
+<pre><code class="language-text">http://localhost:5173
+</code></pre>
+<ol start="3">
+<li>Add these local addresses to the allowed <strong>Redirect URLs</strong>:</li>
+</ol>
+<pre><code class="language-text">http://localhost:5173
+http://127.0.0.1:5173
+</code></pre>
+<ol start="4">
+<li>Save the settings.</li>
+</ol>
+<p>Both addresses refer to your own laptop. This setting matters when the app uses an email-confirmation redirect. <a href="https://supabase.com/docs/guides/auth/redirect-urls">Redirect URL reference</a></p>
+<p><strong>Check:</strong> The local address uses port <code>5173</code>, matching the kit&#39;s start command.</p>
+<h2 id="step-9-add-your-supabase-connection-values">Step 9 — Add your Supabase connection values</h2><ol>
+<li>In your Supabase project, open <strong>Connect</strong> and find the frontend/client connection details. The same values are also available in the project&#39;s API settings.</li>
+<li>Copy your <strong>Project URL</strong> and <strong>Publishable key</strong>. A new publishable key starts with <code>sb_publishable_</code>. Older projects may show a browser-safe legacy <code>anon</code> key instead; the kit accepts that too.</li>
+<li>In Kiro, check whether <code>frontend/.env.local</code> already exists. If you have already configured it, open it and review its values instead of overwriting it.</li>
+<li>On a fresh extraction, copy the template using the terminal:</li>
+</ol>
+<p>Windows PowerShell:</p>
+<pre><code class="language-powershell">Copy-Item .\frontend\.env.example .\frontend\.env.local
+</code></pre>
+<p>macOS/Linux:</p>
+<pre><code class="language-bash">cp frontend/.env.example frontend/.env.local
+</code></pre>
+<ol start="5">
+<li>Open <code>frontend/.env.local</code> in Kiro and replace both example values:</li>
+</ol>
+<pre><code class="language-dotenv">VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
+</code></pre>
+<ol start="6">
+<li>Keep the names to the left of <code>=</code> unchanged. Paste your own values to the right. Replace the placeholders completely; do not paste angle brackets or explanatory text.</li>
+<li>Save the file. Its name must be <strong><code>.env.local</code></strong>, not <code>.env.local.txt</code>.</li>
+</ol>
+<p><strong>Check:</strong> Your file is inside <code>frontend/</code>, the URL starts with <code>https://</code>, and both example values have been replaced. Use the base Project URL, without adding <code>/rest/v1</code> or <code>/auth/v1</code>.</p>
+<p><strong>Use only the publishable or legacy anon key here.</strong> A database password, <code>sb_secret_</code> key or <code>service_role</code> key does not belong in a browser app. The kit checks for common mistakes, but you should still choose the right key. <a href="https://supabase.com/docs/guides/api/api-keys">API key reference</a></p>
+<h2 id="step-10-install-the-app-s-packages">Step 10 — Install the app&#39;s packages</h2><p>In Kiro&#39;s terminal, make sure you are still in the <strong>project root</strong>, not <code>frontend/</code>. Then run:</p>
+<p>Windows PowerShell:</p>
+<pre><code class="language-powershell">npm.cmd ci
+</code></pre>
+<p>macOS/Linux:</p>
+<pre><code class="language-bash">npm ci
+</code></pre>
+<p>This downloads the versions recorded in <code>package-lock.json</code>. Wait until the command finishes and the terminal prompt returns. Do not close the terminal during installation.</p>
+<p><strong>Check:</strong> The command finishes without <code>npm error</code>. A different package count is not by itself a problem. If installation fails, keep the error message and use the troubleshooting table.</p>
+<h2 id="step-11-start-the-frontend-and-check-the-connection">Step 11 — Start the frontend and check the connection</h2><p>From the same project-root terminal:</p>
+<p>Windows PowerShell:</p>
+<pre><code class="language-powershell">npm.cmd run dev
+</code></pre>
+<p>macOS/Linux:</p>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<ol>
+<li>Leave this terminal running.</li>
+<li>Open the local address printed in the terminal, normally <strong><a href="http://127.0.0.1:5173">http://127.0.0.1:5173</a></strong>. You can also use <strong><a href="http://localhost:5173">http://localhost:5173</a></strong>.</li>
+<li>You should reach the Micro Blogging login page.</li>
+<li>Find <strong>Check connection</strong> at the bottom and click it.</li>
+</ol>
+<p><strong>Check:</strong> The message says <strong>“Connected — workshop database is ready.”</strong> This checks the cloud connection and the installed kit version. It does not yet prove that signup and posting work; do those next.</p>
+<p>If the screen instead says <strong>Connect your Supabase project</strong>, return to Step 9. After any <code>.env.local</code> change, stop the app with Ctrl+C and run the start command again. <a href="https://vite.dev/guide/env-and-mode">Vite environment-file reference</a></p>
+<h2 id="step-12-create-your-workshop-app-account">Step 12 — Create your workshop app account</h2><ol>
+<li>On the local app&#39;s login page, click <strong>Register</strong>.</li>
+<li>Fill in the fields:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What to enter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Username</td>
+<td>3–24 lowercase letters, numbers or underscores; for example, <code>student_01</code></td>
+</tr>
+<tr>
+<td>Email</td>
+<td>An email address for this test account; use one you control if confirmation is enabled</td>
+</tr>
+<tr>
+<td>Display Name</td>
+<td>The name to show on your posts, up to 64 characters</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>A new workshop password with at least eight characters; follow any stronger rules set for your project</td>
+</tr>
+<tr>
+<td>Confirm Password</td>
+<td>The same password again</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>Click <strong>Register</strong> once and wait.</li>
+<li>If you turned off confirmation before signup, you should enter the feed automatically.</li>
+<li>If confirmation is on, follow the displayed instruction, confirm your email and then use <strong>Login</strong>.</li>
+</ol>
+<p><strong>Check:</strong> You can see the feed, the New Post link and your display name. An empty feed is expected in a new project.</p>
+<p>On the <strong>Login</strong> page, use your <strong>email and app password</strong>. The username is your profile handle; it is not the login field in this Supabase edition.</p>
+<h2 id="step-13-write-a-post-and-check-that-it-was-saved">Step 13 — Write a post and check that it was saved</h2><ol>
+<li>Click <strong>New Post</strong> in the app menu.</li>
+<li>Type a short message, such as <code>Hello from my Kiro workshop</code>.</li>
+<li>Click <strong>Post</strong>.</li>
+<li>Check that the message appears in the feed.</li>
+<li>Refresh the browser. Check that the message is still there.</li>
+<li>Click its Like button once. Check that its count updates and another click is prevented.</li>
+<li>Click <strong>Profile</strong>. Choose <strong>Edit Profile</strong>, change your display name or short bio, then save.</li>
+<li>Click <strong>Logout</strong>, then log in again using your email and app password.</li>
+</ol>
+<p><strong>Check:</strong> Your post survives a refresh and logout/login. A successful screen load alone is not the finish line.</p>
+<p>The starter allows posts up to 280 characters. A Cancel button on New Post and real commenting are deliberately left for the workshop exercises. A zero comment count does not mean a commenting feature is already implemented.</p>
+<h2 id="step-14-optional-check-a-second-user">Step 14 — Optional: check a second user</h2><p>To try following another user, both accounts must belong to the <strong>same Supabase project</strong>. Your classmates&#39; separate projects do not share a feed.</p>
+<ol>
+<li>Keep the app open in your normal browser window as account A.</li>
+<li>Open the same local URL in a private/incognito window and register a second test account with a different username and email.</li>
+<li>Create a short post as account B.</li>
+<li>Refresh account A&#39;s feed. Click account B&#39;s display name to open their profile.</li>
+<li>Click <strong>Follow</strong>, then <strong>Unfollow</strong>, and observe the count change.</li>
+<li>Close the private window when you finish.</li>
+</ol>
+<p><strong>Check:</strong> Each account has its own identity, while both can see posts in that one project&#39;s feed. Browser privacy settings and the email setting still apply to the second account.</p>
+<h2 id="step-15-open-your-first-kiro-chat">Step 15 — Open your first Kiro chat</h2><p>With the project open in Kiro, start a chat and enter:</p>
+<pre><code class="language-text">Explain this project in simple English. Describe what the frontend does,
+how it connects to Supabase, and where the main pages are.
+Do not change any files yet.
+</code></pre>
+<p>Read the answer and compare it with the files. Ask follow-up questions if a term is unclear. The facilitator will guide you through steering, a small Vibe change, and a reviewed specification later.</p>
+<p><strong>Check:</strong> You can explain where the app runs and where its data is saved.</p>
+<h2 id="stop-today-and-restart-next-time">Stop today and restart next time</h2><h3 id="to-stop">To stop</h3><ol>
+<li>Save your files in Kiro.</li>
+<li>Click the terminal running the app and press <strong>Ctrl+C</strong>. This also works in the macOS terminal.</li>
+<li>Close the browser tab when you finish. Log out first if you share the laptop.</li>
+</ol>
+<p>Stopping the frontend does not delete your cloud project or its posts.</p>
+<h3 id="to-return-later">To return later</h3><ol>
+<li>Open the same <code>kiro-workshop-supabase</code> folder in Kiro.</li>
+<li>Open a terminal at the project root.</li>
+<li>Run <code>npm.cmd run dev</code> on Windows, or <code>npm run dev</code> on macOS/Linux.</li>
+<li>Open the local URL and log in if asked.</li>
+</ol>
+<p>You normally do not need to rerun SQL or install packages every time. If Supabase paused your Free project after inactivity, resume it in the dashboard and check the connection again. Check current plan details on <a href="https://supabase.com/pricing">Supabase pricing</a>.</p>
+<p>After the course, follow your facilitator&#39;s instructions about keeping or removing your disposable cloud project. Deleting a project also deletes its workshop data.</p>
+<h2 id="troubleshooting">Troubleshooting</h2><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The download asks for access</td>
+<td>Ask the facilitator to check the sharing settings or send the correct ZIP. Do not request another student&#39;s account password.</td>
+</tr>
+<tr>
+<td>The ZIP contains <code>backend/</code>, <code>infrastructure/</code> or AWS scripts</td>
+<td>You have the AWS edition. Get the Supabase edition before continuing.</td>
+</tr>
+<tr>
+<td><code>node</code> is not recognised</td>
+<td>Finish the Node.js 24 installation, then close and reopen Kiro and its terminal.</td>
+</tr>
+<tr>
+<td>PowerShell says <code>npm.ps1</code> cannot be loaded</td>
+<td>Use the guide&#39;s <code>npm.cmd</code> command. You do not need to change the computer&#39;s execution policy.</td>
+</tr>
+<tr>
+<td><code>EBADENGINE</code> or an unsupported Node version</td>
+<td>Run <code>node --version</code>. Install Node.js 24.x and reopen Kiro.</td>
+</tr>
+<tr>
+<td><code>ENOENT</code>, missing <code>package.json</code> or no lockfile</td>
+<td>Your terminal is probably in the wrong folder. Repeat Step 4 and locate the project root.</td>
+</tr>
+<tr>
+<td><code>npm ci</code> says the lockfile and package file do not match</td>
+<td>Get a fresh extraction of this edition or ask the facilitator for a corrected kit. Keep the error; do not delete the supplied lockfile as your first fix.</td>
+</tr>
+<tr>
+<td>Package download fails, times out or has a certificate error</td>
+<td>Check internet access and the university network&#39;s proxy requirements with the facilitator. Do not disable certificate checking.</td>
+</tr>
+<tr>
+<td>Port 5173 is already in use</td>
+<td>Find the earlier terminal running your workshop app and stop it with Ctrl+C. Then start again. Ask for help if the port belongs to something else; do not stop all Node processes.</td>
+</tr>
+<tr>
+<td>Browser cannot open the local app</td>
+<td>Check that <code>npm run dev</code> is still running. Use the exact URL from that terminal.</td>
+</tr>
+<tr>
+<td>“Connect your Supabase project” appears</td>
+<td>Check both values in <code>frontend/.env.local</code>, remove the example text and restart the frontend.</td>
+</tr>
+<tr>
+<td>The key is rejected as secret</td>
+<td>Copy the publishable key or legacy anon key. A database password, <code>sb_secret_</code> key or <code>service_role</code> key is the wrong value.</td>
+</tr>
+<tr>
+<td>A connection check reports a missing function/schema</td>
+<td>Run all of <code>supabase/schema.sql</code> in the same project whose URL you copied. Do not use a different project&#39;s key.</td>
+</tr>
+<tr>
+<td>“Failed to fetch”, project unreachable or connection timeout</td>
+<td>Check the Project URL, key, network access and whether the Supabase project is running. Keep the base URL free of extra API paths.</td>
+</tr>
+<tr>
+<td>Changes to <code>.env.local</code> have no effect</td>
+<td>Stop with Ctrl+C, save the file, then start again. Check it is not named <code>.env.local.txt</code>.</td>
+</tr>
+<tr>
+<td>Register does not accept a username</td>
+<td>Use 3–24 lowercase letters, digits or underscores. The username must be unique in this project.</td>
+</tr>
+<tr>
+<td>“Database error saving new user”</td>
+<td>Check that the full SQL ran before signup and that the username is valid and unused. Ask the facilitator to inspect the project error if it persists.</td>
+</tr>
+<tr>
+<td>“Email not confirmed”, no confirmation mail or email rate limit</td>
+<td>Recheck Step 7. Do not repeatedly resend. An account created before changing the setting may need email confirmation or facilitator help.</td>
+</tr>
+<tr>
+<td>Login fails</td>
+<td>Use the app account&#39;s email, not its username or your Supabase dashboard password. Check the confirmation setting and password.</td>
+</tr>
+<tr>
+<td>A profile is missing</td>
+<td>The app account may have been created before SQL setup. Ask the facilitator to repair it or help create a fresh test account after setup; do not delete the tables.</td>
+</tr>
+<tr>
+<td>Permission denied, RLS or missing-table errors</td>
+<td>Check that the whole supplied SQL completed in the correct project. Keep RLS on and show the exact error to the facilitator.</td>
+</tr>
+<tr>
+<td>A classmate&#39;s post is missing</td>
+<td>Separate Supabase projects have separate data. For the two-user exercise, create both app accounts in your own project.</td>
+</tr>
+</tbody></table>
+<h3 id="what-to-share-when-asking-for-help">What to share when asking for help</h3><p>Share the step number, the exact error, your operating system, and the output of <code>node --version</code> and <code>npm.cmd --version</code> (Windows) or <code>npm --version</code> (macOS/Linux). A screenshot of the error can help. Hide passwords, secret keys and sign-in codes.</p>
+<h2 id="ready-for-workshop-checklist">Ready-for-workshop checklist</h2><ul>
+<li><input disabled="" type="checkbox"> I extracted the Supabase edition and opened the correct root folder.</li>
+<li><input disabled="" type="checkbox"> Kiro is signed in and Node.js 24 is available.</li>
+<li><input disabled="" type="checkbox"> I created my own Free Supabase project.</li>
+<li><input disabled="" type="checkbox"> The complete SQL ran and all four tables exist.</li>
+<li><input disabled="" type="checkbox"> I chose the workshop email-confirmation setting before app signup.</li>
+<li><input disabled="" type="checkbox"> My own Project URL and publishable key are saved in <code>frontend/.env.local</code>.</li>
+<li><input disabled="" type="checkbox"> Package installation completed and the local app starts.</li>
+<li><input disabled="" type="checkbox"> Check connection reports that the database is ready.</li>
+<li><input disabled="" type="checkbox"> I can register/login, create a post and see it after a refresh.</li>
+<li><input disabled="" type="checkbox"> I know how to stop and restart the frontend.</li>
+</ul>
+<h2 id="official-help">Official help</h2><ul>
+<li><a href="https://kiro.dev/docs/getting-started/installation/">Kiro installation and sign-in</a></li>
+<li><a href="https://supabase.com/docs/guides/getting-started/quickstarts/reactjs">Supabase with React</a></li>
+<li><a href="https://supabase.com/docs/guides/auth/passwords">Supabase password login and email confirmation</a></li>
+<li><a href="https://supabase.com/docs/guides/api/api-keys">Supabase public and secret API keys</a></li>
+<li><a href="https://supabase.com/docs/guides/auth/auth-smtp">Supabase email service</a></li>
+<li><a href="https://supabase.com/docs/guides/auth/rate-limits">Supabase Auth rate limits</a></li>
+<li><a href="https://supabase.com/pricing">Supabase Free-plan limits</a></li>
+</ul>
+<p>Dashboard labels and plan allowances can change. This guide was checked against official documentation on 26 October 2026. The supplied browser tests simulate Supabase responses; the local database tests check SQL access rules. Your own cloud project&#39;s live signup and posting are verified by the manual checks above.</p>
+</main></div><script>
+document.querySelectorAll('table').forEach(table=>{const wrapper=document.createElement('div');wrapper.className='table-wrap';table.before(wrapper);wrapper.append(table)});
+document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='copy';b.textContent='Copy';b.type='button';b.setAttribute('aria-label','Copy this command block');b.onclick=async()=>{const t=pre.querySelector('code').textContent;try{await navigator.clipboard.writeText(t);b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)}catch{const selection=getSelection();const range=document.createRange();range.selectNodeContents(pre.querySelector('code'));selection.removeAllRanges();selection.addRange(range);b.textContent='Press Ctrl/Cmd+C'}};pre.append(b)});
+</script></body></html>

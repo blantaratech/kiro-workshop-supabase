@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output and TypeScript cache
+**/dist/
+*.tsbuildinfo
+
+# Test reports and coverage
+coverage/
+playwright-report/
+test-results/
+
+# Environment files (keep example templates)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local documentation and agent instructions
+docs/
+AGENTS.md
