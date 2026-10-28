@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "jebat": {
+      "command": "/home/YOUR_USER/.local/jebat/venv/bin/python",
+      "args": [
+        "/home/YOUR_USER/.local/jebat/jebat-mcp",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "JEBAT_MCP_TOOLS_ALLOW": "file_read,file_search,web_extract"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

@@ -7,6 +7,7 @@ export default defineConfig({
     maxWorkers: 1,
     coverage: {
       provider: 'v8',
+      reportsDirectory: 'docs/shared/validation/coverage',
       include: ['frontend/src/lib/config.ts', 'frontend/src/lib/domain.ts'],
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
     },

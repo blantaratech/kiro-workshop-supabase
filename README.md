@@ -1,51 +1,37 @@
-# Kiro 101 — Supabase startup kit
+# Kiro workshop: student learning path
 
-Edition **1.0.0**
-Each student runs the frontend locally and connects to their own Supabase Free project.
+Start with **Kiro 101**, then continue to **Kiro 102**. Both lessons use the same Supabase workshop app.
 
-**Start with [STUDENT_SETUP_GUIDE.html](STUDENT_SETUP_GUIDE.html)** in your browser, or read [the Markdown guide](STUDENT_SETUP_GUIDE.md). It covers installation, cloud-project creation, SQL, Auth settings, connection values, app startup and troubleshooting.
+| Lesson | What you will do | Open the guide |
+| --- | --- | --- |
+| **[Kiro 101](kiro-101/README.md)** | Install the tools, create your Supabase project and run the app | [Browser guide](kiro-101/STUDENT_SETUP_GUIDE.html) · [Markdown guide](kiro-101/STUDENT_SETUP_GUIDE.md) |
+| **[Kiro 102](kiro-102/README.md)** | Plan a small feature with specs and connect Jebat MCP | [Browser guide](kiro-102/STUDENT_GUIDE.html) · [Markdown guide](kiro-102/STUDENT_GUIDE.md) |
 
-## Quick reference
+On GitHub, use the Markdown guides. After cloning or downloading, open the HTML guides in your browser for the contents menu, copy buttons and printing.
 
-1. Install Node.js 24 and Kiro IDE.
-2. Create your own Supabase project. Run `supabase/schema.sql` in its SQL Editor before creating an app account.
-3. Choose the email-confirmation setting described in the student guide and configure the localhost redirect addresses.
-4. Copy `frontend/.env.example` to `frontend/.env.local`; enter your Project URL and publishable key. Never put a secret/service_role key in the frontend.
-5. From this folder, run `npm ci`, then `npm run dev`. In Windows PowerShell, use `npm.cmd ci` and `npm.cmd run dev`.
-6. Open the local URL, check the connection, register and create a test post.
+## Find your materials
 
-This archive contains no deployed backend and no project-specific credentials. It needs an internet connection to Supabase. You do not need AWS, Docker or a local backend server.
-
-## Included baseline
-
-Email/password signup and login, session restoration, feed, 280-character posts, likes, profiles and follows. Supabase stores the data and enforces access with table grants and Row Level Security. Public profiles do not include email addresses.
-
-The New Post Cancel button and real commenting remain workshop exercises. The existing comment count stays zero until students implement commenting. Other students' separate projects do not share your feed.
-
-## Files
-
-| Location | Purpose |
-| --- | --- |
-| `frontend/src/pages/` | The original workshop page structure, adapted for Supabase |
-| `frontend/src/contexts/AuthContext.tsx` | Supabase signup/login/session handling |
-| `frontend/src/services/api.ts` | Database calls used by the pages |
-| `frontend/src/lib/` | Public configuration, client and data validation |
-| `supabase/schema.sql` | Tables, signup trigger, helper functions, grants and access rules |
-| `tests/database.test.mjs` | Local Postgres-compatible access-rule tests |
-| `tests/domain.test.ts` | Configuration and behavior checks |
-| `tests/browser/` | Browser tests using simulated Supabase responses |
-
-## Developer checks
-
-After `npm ci`, run these from the root:
-
-```bash
-npm run typecheck
-npm run lint
-npm run build
-npm run test:coverage
+```text
+kiro-workshop-supabase/
+├── README.md          Start here: choose your lesson
+├── kiro-101/          Setup guide and app design reference
+├── kiro-102/          Specs + Jebat guide, examples, configs and worksheet
+├── frontend/         Shared React app
+├── supabase/         Database setup SQL
+├── tests/            Checks for your app changes
+└── scripts/          App browser-test helper
 ```
 
-For browser checks, stop any dev server on ports 5173 and 5174, install the test browser once with `npx playwright install chromium`, then run `npm run test:e2e`. The helper starts two temporary local servers and closes them after the tests. It uses synthetic connection values and never accesses a real Supabase project.
+Open the **repository root** in Kiro: the folder containing `package.json`, `frontend` and `supabase`. Run npm commands from that folder, even while reading a guide inside a lesson folder.
 
-The SQL tests run PostgreSQL-compatible PGlite locally with simulated Supabase Auth roles. Passing them is not evidence of a configured cloud project; complete the guide's live manual checks on your own project.
+Each student uses their own Supabase project. Keep your connection values in `frontend/.env.local`, following Kiro 101. Use only a publishable or legacy anon key in the frontend.
+
+## Already set up?
+
+From the repository root, start the app:
+
+```powershell
+npm.cmd run dev
+```
+
+On macOS/Linux, use `npm run dev`. If this is your first time, follow Kiro 101 before running this command.

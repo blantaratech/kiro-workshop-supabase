@@ -7,6 +7,6 @@ export default function SetupNotice() {
       <li>Copy <code>frontend/.env.example</code> to <code>frontend/.env.local</code>.</li>
       <li>Add the Project URL and publishable key from the project’s Connect panel.</li>
       <li>Stop the terminal with Ctrl+C, then run <code>npm run dev</code> again.</li></ol>
-    <p>Follow STUDENT_SETUP_GUIDE.html included with this kit. Use a publishable key; keep secret keys out of the frontend.</p>
+    <p>Follow kiro-101/STUDENT_SETUP_GUIDE.html included with this kit. Use a publishable key; keep secret keys out of the frontend.</p>
   </main>;
 }

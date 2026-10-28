@@ -1,5 +1,7 @@
 # Kiro 101: set up your workshop app
 
+**Lesson 1 of 2** · After setup, continue to [Kiro 102: specs and Jebat MCP](../kiro-102/STUDENT_GUIDE.html).
+
 You will run a small social-posting app on your laptop and connect it to your own free Supabase cloud project. When you finish, you should be able to create an app account, log in, write a post and see it again after refreshing the browser.
 
 Allow **45–60 minutes for a first setup**, depending on downloads and account creation. This is a planning estimate. Keep this guide open while you work.
@@ -121,7 +123,11 @@ kiro-workshop-supabase/
 ├── package.json
 ├── package-lock.json
 ├── README.md
-├── STUDENT_SETUP_GUIDE.html
+├── kiro-101/
+│   ├── STUDENT_SETUP_GUIDE.html
+│   └── DESIGN_LANGUAGE.md
+├── kiro-102/
+│   └── STUDENT_GUIDE.html
 ├── frontend/
 │   ├── .env.example
 │   └── src/
@@ -129,7 +135,7 @@ kiro-workshop-supabase/
     └── schema.sql
 ```
 
-Other folders, such as `tests/`, are included too. They do not need to be opened for setup.
+Other folders, such as `tests/`, are included too. They do not need to be opened for setup. The lesson folders contain instructions; keep Kiro and the terminal at the repository root when working on the app.
 
 **Check:** Cloning finishes without a fatal error, and the `kiro-workshop-supabase` folder contains `package.json`, `frontend` and `supabase`. You will configure your own Supabase connection in Step 9.
 

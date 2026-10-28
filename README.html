@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kiro workshop: student learning path</title><style>
+:root{--ink:#20243a;--muted:#5c647b;--purple:#653cc1;--line:#dedfeb;--paper:#fff;--bg:#f5f5fa}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.72 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#5633a8;text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid #8862df;outline-offset:4px}.skip{position:absolute;left:12px;top:-90px;background:white;padding:10px;z-index:2}.skip:focus{top:12px}
+.bar{padding:18px 32px;background:#242138;color:white;display:flex;align-items:center;justify-content:space-between;gap:16px}.bar a{color:white;text-decoration:none;font-weight:700}.bar span{font-size:13px;color:#e0d8f2}.bar button{background:white;color:#29213e;border:0;padding:10px 16px;border-radius:5px;cursor:pointer;font:inherit;font-size:14px}.layout{display:grid;grid-template-columns:245px minmax(0,900px);gap:36px;max-width:1260px;margin:30px auto;padding:0 24px 72px}nav{align-self:start;position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;font-size:14px;line-height:1.5}nav strong{display:block;margin:0 0 12px}nav a{display:block;padding:7px 10px;text-decoration:none;color:var(--muted);border-left:2px solid transparent}nav a:hover{background:#eee9fa;color:#4c288e;border-left-color:var(--purple)}main{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:42px 46px;box-shadow:0 6px 24px #23213a05}
+h1{font-size:40px;line-height:1.18;letter-spacing:-1px;margin:0 0 24px}h2{color:#5430a1;font-size:27px;line-height:1.3;margin:46px 0 20px;padding-top:28px;border-top:1px solid var(--line)}h3{font-size:21px;line-height:1.4;margin:28px 0 12px}p,li{overflow-wrap:anywhere}li{margin:7px 0}strong{font-weight:700}code{font:0.88em ui-monospace,Consolas,monospace;background:#f0edf8;padding:2px 5px;border-radius:3px}pre{position:relative;padding:42px 20px 20px;background:#26233b;color:#faf7ff;border-radius:6px;overflow:auto;line-height:1.6}pre code{background:none;padding:0;white-space:pre;font-size:13px}.copy{position:absolute;right:9px;top:9px;background:#49415f;color:white;border:1px solid #a799c2;border-radius:4px;padding:4px 10px;cursor:pointer}.tables{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.6}th,td{padding:12px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:#efeafa;color:#392460}th:first-child,td:first-child{min-width:140px}blockquote{margin:20px 0;border-left:4px solid var(--purple);background:#f7f4fc;padding:2px 18px}footer{font-size:13px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:16px}input[type=checkbox]{margin-right:7px}
+@media(max-width:980px){.layout{grid-template-columns:1fr;gap:18px}nav{position:static;max-height:220px;border:1px solid var(--line);border-radius:6px;padding:14px}main{padding:30px}h1{font-size:34px}}
+@media(max-width:540px){body{font-size:16px}.bar{padding:14px 16px}.bar span{display:none}.layout{padding:0 10px 30px;margin:16px auto}main{padding:24px 17px}h1{font-size:30px}h2{font-size:24px}h3{font-size:20px}pre{padding-left:14px;padding-right:14px}th,td{padding:10px;font-size:14px}}
+@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10.5pt;line-height:1.5}.bar,nav,.skip,.copy{display:none!important}.layout{display:block;margin:0;padding:0;max-width:none}main{border:0;box-shadow:none;padding:0}h1{font-size:26pt}h2{font-size:17pt;margin-top:24px;padding-top:16px}h2,h3{break-after:avoid}table{font-size:9pt}tr{break-inside:avoid}.tables{overflow:visible}pre{background:#f1eef7;color:#20243a;white-space:pre-wrap;break-inside:avoid;padding:12px}pre code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8.5pt}a{color:#432778}}
+</style></head><body><a class="skip" href="#main">Skip to guide</a><header class="bar"><a href="README.html">Kiro workshop · Student guides</a><span>Student workshop · 29 October 2026</span><button id="print" type="button">Print / Save as PDF</button></header><div class="layout"><nav aria-label="On this page"><strong>On this page</strong><a href="#find-your-materials">Find your materials</a><a href="#already-set-up">Already set up?</a></nav><main id="main"><h1 id="kiro-workshop-student-learning-path">Kiro workshop: student learning path</h1><p>Start with <strong>Kiro 101</strong>, then continue to <strong>Kiro 102</strong>. Both lessons use the same Supabase workshop app.</p>
+<table>
+<thead>
+<tr>
+<th>Lesson</th>
+<th>What you will do</th>
+<th>Open the guide</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><a href="kiro-101/README.html">Kiro 101</a></strong></td>
+<td>Install the tools, create your Supabase project and run the app</td>
+<td><a href="kiro-101/STUDENT_SETUP_GUIDE.html">Browser guide</a> · <a href="kiro-101/STUDENT_SETUP_GUIDE.md">Markdown guide</a></td>
+</tr>
+<tr>
+<td><strong><a href="kiro-102/README.html">Kiro 102</a></strong></td>
+<td>Plan a small feature with specs and connect Jebat MCP</td>
+<td><a href="kiro-102/STUDENT_GUIDE.html">Browser guide</a> · <a href="kiro-102/STUDENT_GUIDE.md">Markdown guide</a></td>
+</tr>
+</tbody></table>
+<p>On GitHub, use the Markdown guides. After cloning or downloading, open the HTML guides in your browser for the contents menu, copy buttons and printing.</p>
+<h2 id="find-your-materials">Find your materials</h2><pre><code class="language-text">kiro-workshop-supabase/
+├── README.md          Start here: choose your lesson
+├── kiro-101/          Setup guide and app design reference
+├── kiro-102/          Specs + Jebat guide, examples, configs and worksheet
+├── frontend/         Shared React app
+├── supabase/         Database setup SQL
+├── tests/            Checks for your app changes
+└── scripts/          App browser-test helper
+</code></pre>
+<p>Open the <strong>repository root</strong> in Kiro: the folder containing <code>package.json</code>, <code>frontend</code> and <code>supabase</code>. Run npm commands from that folder, even while reading a guide inside a lesson folder.</p>
+<p>Each student uses their own Supabase project. Keep your connection values in <code>frontend/.env.local</code>, following Kiro 101. Use only a publishable or legacy anon key in the frontend.</p>
+<h2 id="already-set-up">Already set up?</h2><p>From the repository root, start the app:</p>
+<pre><code class="language-powershell">npm.cmd run dev
+</code></pre>
+<p>On macOS/Linux, use <code>npm run dev</code>. If this is your first time, follow Kiro 101 before running this command.</p>
+<footer>Beginner workshop companion · Read tool activity and check results before marking a task complete.</footer></main></div><script>
+document.querySelectorAll('table').forEach(table=>{const wrap=document.createElement('div');wrap.className='tables';table.before(wrap);wrap.append(table)});
+document.querySelectorAll('pre').forEach(pre=>{const button=document.createElement('button');button.type='button';button.className='copy';button.textContent='Copy';button.setAttribute('aria-label','Copy this example');button.addEventListener('click',async()=>{const code=pre.querySelector('code');try{await navigator.clipboard.writeText(code.textContent);button.textContent='Copied';setTimeout(()=>button.textContent='Copy',1800)}catch{const range=document.createRange();range.selectNodeContents(code);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);button.textContent='Press Ctrl/Cmd+C'}});pre.append(button)});
+document.getElementById('print').addEventListener('click',()=>window.print());
+</script></body></html>

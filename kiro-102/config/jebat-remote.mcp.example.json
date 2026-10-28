@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "jebat": {
+      "url": "https://mcp.jebat.online/mcp",
+      "headers": {
+        "Authorization": "Bearer ${JEBAT_MCP_API_KEY}"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

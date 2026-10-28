@@ -20,5 +20,11 @@ test-results/
 !**/.env.example
 
 # Local documentation and agent instructions
-docs/
+/docs/
 AGENTS.md
+
+# Trainer-only exports and evidence must stay local, including accidental copies.
+FACILITATOR_NOTES.*
+VALIDATION.*
+**/qa/
+*.zip

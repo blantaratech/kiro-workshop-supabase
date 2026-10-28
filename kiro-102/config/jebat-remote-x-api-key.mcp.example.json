@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "jebat": {
+      "url": "https://REPLACE_WITH_TRAINER_HOST/mcp",
+      "headers": {
+        "X-API-Key": "${JEBAT_MCP_API_KEY}"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

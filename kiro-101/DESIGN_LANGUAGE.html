@@ -1,0 +1,432 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Micro Blogging App Design Language</title><style>
+:root{--ink:#20243a;--muted:#5c647b;--purple:#653cc1;--line:#dedfeb;--paper:#fff;--bg:#f5f5fa}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.72 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#5633a8;text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid #8862df;outline-offset:4px}.skip{position:absolute;left:12px;top:-90px;background:white;padding:10px;z-index:2}.skip:focus{top:12px}
+.bar{padding:18px 32px;background:#242138;color:white;display:flex;align-items:center;justify-content:space-between;gap:16px}.bar a{color:white;text-decoration:none;font-weight:700}.bar span{font-size:13px;color:#e0d8f2}.bar button{background:white;color:#29213e;border:0;padding:10px 16px;border-radius:5px;cursor:pointer;font:inherit;font-size:14px}.layout{display:grid;grid-template-columns:245px minmax(0,900px);gap:36px;max-width:1260px;margin:30px auto;padding:0 24px 72px}nav{align-self:start;position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;font-size:14px;line-height:1.5}nav strong{display:block;margin:0 0 12px}nav a{display:block;padding:7px 10px;text-decoration:none;color:var(--muted);border-left:2px solid transparent}nav a:hover{background:#eee9fa;color:#4c288e;border-left-color:var(--purple)}main{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:42px 46px;box-shadow:0 6px 24px #23213a05}
+h1{font-size:40px;line-height:1.18;letter-spacing:-1px;margin:0 0 24px}h2{color:#5430a1;font-size:27px;line-height:1.3;margin:46px 0 20px;padding-top:28px;border-top:1px solid var(--line)}h3{font-size:21px;line-height:1.4;margin:28px 0 12px}p,li{overflow-wrap:anywhere}li{margin:7px 0}strong{font-weight:700}code{font:0.88em ui-monospace,Consolas,monospace;background:#f0edf8;padding:2px 5px;border-radius:3px}pre{position:relative;padding:42px 20px 20px;background:#26233b;color:#faf7ff;border-radius:6px;overflow:auto;line-height:1.6}pre code{background:none;padding:0;white-space:pre;font-size:13px}.copy{position:absolute;right:9px;top:9px;background:#49415f;color:white;border:1px solid #a799c2;border-radius:4px;padding:4px 10px;cursor:pointer}.tables{overflow:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.6}th,td{padding:12px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:#efeafa;color:#392460}th:first-child,td:first-child{min-width:140px}blockquote{margin:20px 0;border-left:4px solid var(--purple);background:#f7f4fc;padding:2px 18px}footer{font-size:13px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:16px}input[type=checkbox]{margin-right:7px}
+@media(max-width:980px){.layout{grid-template-columns:1fr;gap:18px}nav{position:static;max-height:220px;border:1px solid var(--line);border-radius:6px;padding:14px}main{padding:30px}h1{font-size:34px}}
+@media(max-width:540px){body{font-size:16px}.bar{padding:14px 16px}.bar span{display:none}.layout{padding:0 10px 30px;margin:16px auto}main{padding:24px 17px}h1{font-size:30px}h2{font-size:24px}h3{font-size:20px}pre{padding-left:14px;padding-right:14px}th,td{padding:10px;font-size:14px}}
+@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10.5pt;line-height:1.5}.bar,nav,.skip,.copy{display:none!important}.layout{display:block;margin:0;padding:0;max-width:none}main{border:0;box-shadow:none;padding:0}h1{font-size:26pt}h2{font-size:17pt;margin-top:24px;padding-top:16px}h2,h3{break-after:avoid}table{font-size:9pt}tr{break-inside:avoid}.tables{overflow:visible}pre{background:#f1eef7;color:#20243a;white-space:pre-wrap;break-inside:avoid;padding:12px}pre code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8.5pt}a{color:#432778}}
+</style></head><body><a class="skip" href="#main">Skip to guide</a><header class="bar"><a href="STUDENT_SETUP_GUIDE.html">Kiro 101 · Setup and Supabase</a><span>Student workshop · 29 October 2026</span><button id="print" type="button">Print / Save as PDF</button></header><div class="layout"><nav aria-label="On this page"><strong>On this page</strong><a href="#overview">Overview</a><a href="#design-philosophy">🎨 Design Philosophy</a><a href="#color-system">🌈 Color System</a><a href="#typography-system">📝 Typography System</a><a href="#spacing-system">📏 Spacing System</a><a href="#component-system">🧩 Component System</a><a href="#responsive-design-system">📱 Responsive Design System</a><a href="#component-specifications">🎯 Component Specifications</a><a href="#utility-classes">🔧 Utility Classes</a><a href="#design-patterns">🎨 Design Patterns</a><a href="#implementation-guidelines">🔄 Implementation Guidelines</a></nav><main id="main"><h1 id="micro-blogging-app-design-language">Micro Blogging App Design Language</h1><h2 id="overview">Overview</h2><p>The Micro Blogging App design language is built around a <strong>modern, social media-inspired aesthetic</strong> that prioritizes user engagement and content discovery. The system uses a clean purple and white theme with rounded elements for a friendly, approachable experience.</p>
+<h2 id="design-philosophy">🎨 Design Philosophy</h2><h3 id="core-principles">Core Principles</h3><ul>
+<li><strong>Social-First</strong>: Interface optimized for content sharing and user interaction</li>
+<li><strong>Modern &amp; Friendly</strong>: Purple accent colors with rounded corners for approachability</li>
+<li><strong>Content-Focused</strong>: Clean layouts that highlight posts and user-generated content</li>
+<li><strong>Responsive Design</strong>: Seamless experience across mobile, tablet, and desktop</li>
+<li><strong>Performance-Optimized</strong>: Lightweight styling for fast loading and smooth interactions</li>
+<li><strong>Accessibility-Aware</strong>: Good contrast ratios and clear visual hierarchy</li>
+</ul>
+<h3 id="visual-identity">Visual Identity</h3><ul>
+<li><strong>Clean &amp; Engaging</strong>: Suitable for social interaction and content consumption</li>
+<li><strong>Modern</strong>: Contemporary design patterns that feel current and fresh</li>
+<li><strong>Focused</strong>: Minimal visual distractions to highlight posts and user interactions</li>
+<li><strong>Scalable</strong>: Design system that works across different screen sizes and contexts</li>
+</ul>
+<h2 id="color-system">🌈 Color System</h2><h3 id="primary-theme">Primary Theme</h3><h4 id="light-theme-default"><strong>Light Theme</strong> (Default)</h4><ul>
+<li><strong>Primary Palette</strong>: White backgrounds with purple accents and dark text</li>
+<li><strong>Accent Color</strong>: Purple (#8b5cf6) for buttons, links, and interactive elements</li>
+<li><strong>Background</strong>: Light gray (#f5f8fa) for app background, white (#ffffff) for cards</li>
+<li><strong>Text Hierarchy</strong>: Dark gray (#14171a) for primary text, lighter grays for secondary</li>
+<li><strong>Personality</strong>: Clean, modern, social media-inspired</li>
+<li><strong>Use Case</strong>: All users - provides optimal readability and engagement</li>
+</ul>
+<h3 id="color-tokens">Color Tokens</h3><pre><code class="language-css">/* CSS Variables */
+:root {
+  --primary-color: #8b5cf6;        /* Purple accent */
+  --secondary-color: #14171a;      /* Dark text */
+  --background-color: #ffffff;     /* Card backgrounds */
+  --app-background: #f5f8fa;       /* App background */
+  --text-color: #14171a;           /* Primary text */
+  --border-color: #e1e8ed;         /* Borders and dividers */
+  --error-color: #e0245e;          /* Error states */
+  --success-color: #17bf63;        /* Success states */
+}
+
+/* Text Colors */
+--text-primary: #14171a;          /* Main content */
+--text-secondary: #657786;        /* Supporting text */
+--text-muted: #8899a6;           /* Less important content */
+--text-disabled: #aab8c2;        /* Inactive elements */
+
+/* Interactive Elements */
+--button-primary: #8b5cf6;        /* Primary buttons */
+--button-hover: #7c3aed;          /* Button hover state */
+--button-disabled: #c4b5fd;       /* Disabled buttons */
+--link-color: #8b5cf6;            /* Links */
+
+/* Semantic Colors */
+--like-color: #e0245e;            /* Like button active */
+--follow-color: #8b5cf6;          /* Follow button */
+--warning-color: #ffad1f;         /* Warnings */
+--info-color: #1da1f2;           /* Information */
+</code></pre>
+<h3 id="color-usage-guidelines">Color Usage Guidelines</h3><h4 id="application-background"><strong>Application Background</strong></h4><ul>
+<li><strong>App Background</strong>: Light gray (#f5f8fa) for overall app background</li>
+<li><strong>Card Background</strong>: Pure white (#ffffff) for posts, profiles, and content cards</li>
+<li><strong>Consistency</strong>: White cards on light gray background throughout the app</li>
+</ul>
+<h4 id="text-hierarchy"><strong>Text Hierarchy</strong></h4><ul>
+<li><strong>Primary Text</strong>: Dark gray (#14171a) for headings and main content</li>
+<li><strong>Secondary Text</strong>: Medium gray (#657786) for timestamps, metadata</li>
+<li><strong>Muted Text</strong>: Light gray (#8899a6) for less important information</li>
+<li><strong>Disabled Text</strong>: Very light gray (#aab8c2) for inactive elements</li>
+</ul>
+<h4 id="interactive-elements"><strong>Interactive Elements</strong></h4><ul>
+<li><strong>Primary Buttons</strong>: Purple background (#8b5cf6) with white text</li>
+<li><strong>Button Hover</strong>: Darker purple (#7c3aed) for hover states</li>
+<li><strong>Links</strong>: Purple color (#8b5cf6) matching primary color</li>
+<li><strong>Borders</strong>: Light gray (#e1e8ed) for subtle separation</li>
+</ul>
+<h2 id="typography-system">📝 Typography System</h2><h3 id="font-families">Font Families</h3><pre><code class="language-css">/* System Font Stack */
+font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, Helvetica, Arial, sans-serif;
+
+/* Alternative (from index.css) */
+font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+</code></pre>
+<h3 id="type-scale">Type Scale</h3><pre><code class="language-css">/* Font Sizes */
+xs: 12px     /* Small labels, API display */
+sm: 14px     /* Secondary text, timestamps */
+base: 16px   /* Body text, default size */
+lg: 18px     /* Emphasized content */
+xl: 20px     /* Small headings */
+2xl: 24px    /* Section headings */
+3xl: 30px    /* Page titles */
+</code></pre>
+<h3 id="font-weights">Font Weights</h3><pre><code class="language-css">normal: 400    /* Body text */
+medium: 500    /* Labels, emphasized text */
+semibold: 600  /* Buttons, important text */
+bold: 700      /* User names, strong emphasis */
+</code></pre>
+<h3 id="typography-usage">Typography Usage</h3><h4 id="system-fonts"><strong>System Fonts</strong></h4><ul>
+<li><strong>Purpose</strong>: All text content, UI elements, buttons</li>
+<li><strong>Characteristics</strong>: Highly legible, native feel, cross-platform</li>
+<li><strong>Usage</strong>: Entire application uses system font stack for consistency</li>
+</ul>
+<h4 id="text-hierarchy-1"><strong>Text Hierarchy</strong></h4><ul>
+<li><strong>Headings</strong>: Bold weight (700) for user names and important titles</li>
+<li><strong>Body Text</strong>: Normal weight (400) for post content and descriptions</li>
+<li><strong>Labels</strong>: Medium weight (500) for form labels and UI text</li>
+<li><strong>Buttons</strong>: Semibold weight (600) for interactive elements</li>
+</ul>
+<h2 id="spacing-system">📏 Spacing System</h2><h3 id="spacing-scale">Spacing Scale</h3><pre><code class="language-css">/* Spacing Values */
+xs: 4px      /* Tight spacing, borders */
+sm: 8px      /* Small gaps, padding */
+md: 16px     /* Standard spacing */
+lg: 24px     /* Section spacing */
+xl: 32px     /* Large gaps */
+2xl: 48px    /* Major sections */
+3xl: 64px    /* Page sections */
+</code></pre>
+<h3 id="spacing-usage-guidelines">Spacing Usage Guidelines</h3><ul>
+<li><strong>xs (4px)</strong>: Border radius for rounded corners</li>
+<li><strong>sm (8px)</strong>: Small padding, tight element spacing</li>
+<li><strong>md (16px)</strong>: Standard component padding, form spacing, card padding</li>
+<li><strong>lg (24px)</strong>: Section spacing, large component gaps</li>
+<li><strong>xl (32px)</strong>: Major layout sections</li>
+<li><strong>2xl+ (48px+)</strong>: Page-level spacing, hero areas</li>
+</ul>
+<h2 id="component-system">🧩 Component System</h2><h3 id="button-system">Button System</h3><pre><code class="language-css">/* Base Button */
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 9999px;        /* Fully rounded */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Button States */
+.button:hover {
+  background-color: var(--button-hover);
+}
+
+.button:disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.like-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: normal;
+}
+
+.like-button.liked {
+  color: var(--like-color);
+}
+
+.follow-button.following {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+</code></pre>
+<h3 id="card-system">Card System</h3><pre><code class="language-css">/* Post Cards */
+.post-card {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Profile Cards */
+.profile-header {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Create Post Card */
+.create-post {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+</code></pre>
+<h3 id="form-elements">Form Elements</h3><pre><code class="language-css">/* Form Groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Input Fields */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Select Elements */
+.sort-select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: white;
+}
+</code></pre>
+<h3 id="layout-system">Layout System</h3><pre><code class="language-css">/* App Layout */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Feed Layout */
+.feed-layout {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  min-height: 0;
+}
+
+.feed-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.feed-sidebar {
+  width: 50%;
+  display: none;
+}
+</code></pre>
+<h2 id="responsive-design-system">📱 Responsive Design System</h2><h3 id="breakpoints">Breakpoints</h3><pre><code class="language-css">/* Mobile First Approach */
+/* Mobile: Default styles (up to 768px) */
+/* Tablet: 769px - 1024px */
+/* Desktop: 1025px+ */
+/* Large Desktop: 1200px+ */
+</code></pre>
+<h3 id="mobile-layout-768px">Mobile Layout (≤768px)</h3><pre><code class="language-css">@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+
+  .feed-layout {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .feed-main {
+    width: 100%;
+    max-width: none;
+  }
+
+  .feed-sidebar {
+    display: none;
+  }
+
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+</code></pre>
+<h3 id="desktop-layout-769px">Desktop Layout (≥769px)</h3><pre><code class="language-css">@media (min-width: 769px) {
+  .content {
+    padding: 1rem 2rem;
+    max-width: none;
+  }
+
+  .feed-main {
+    width: 50%;
+    flex: none;
+    max-width: 50%;
+  }
+
+  .feed-sidebar {
+    display: block;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-color);
+    flex: 1;
+  }
+}
+</code></pre>
+<h3 id="large-desktop-layout-1200px">Large Desktop Layout (≥1200px)</h3><pre><code class="language-css">@media (min-width: 1200px) {
+  .content {
+    padding: 1rem 3rem;
+  }
+
+  .feed-layout {
+    gap: 3rem;
+  }
+}
+</code></pre>
+<h2 id="component-specifications">🎯 Component Specifications</h2><h3 id="navigation">Navigation</h3><ul>
+<li><strong>Header Height</strong>: Auto-sizing with 0.5rem vertical padding</li>
+<li><strong>Sticky Position</strong>: Fixed to top with z-index 100</li>
+<li><strong>Border</strong>: Bottom border using --border-color</li>
+<li><strong>Background</strong>: White background matching cards</li>
+</ul>
+<h3 id="posts">Posts</h3><ul>
+<li><strong>Card Padding</strong>: 1rem for standard posts</li>
+<li><strong>Border Radius</strong>: 8px for rounded corners</li>
+<li><strong>Border</strong>: 1px solid --border-color</li>
+<li><strong>Spacing</strong>: 1rem gap between posts in feed</li>
+</ul>
+<h3 id="buttons">Buttons</h3><ul>
+<li><strong>Border Radius</strong>: 9999px for fully rounded buttons</li>
+<li><strong>Padding</strong>: 0.5rem horizontal, 1rem vertical</li>
+<li><strong>Font Weight</strong>: 600 (semibold)</li>
+<li><strong>Transition</strong>: 0.2s background-color for smooth hover</li>
+</ul>
+<h3 id="forms">Forms</h3><ul>
+<li><strong>Input Padding</strong>: 0.75rem for comfortable touch targets</li>
+<li><strong>Border Radius</strong>: 4px for subtle rounding</li>
+<li><strong>Label Weight</strong>: 500 (medium) for clear hierarchy</li>
+</ul>
+<h2 id="utility-classes">🔧 Utility Classes</h2><h3 id="spacing-utilities">Spacing Utilities</h3><pre><code class="language-css">/* Margins */
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-2 { margin-top: 2rem; }
+
+/* Padding */
+.p-1 { padding: 1rem; }
+.p-2 { padding: 2rem; }
+
+/* Gaps */
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+</code></pre>
+<h3 id="layout-utilities">Layout Utilities</h3><pre><code class="language-css">/* Flexbox */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+/* Sizing */
+.w-full { width: 100%; }
+.max-w-400 { max-width: 400px; }
+.max-w-600 { max-width: 600px; }
+</code></pre>
+<h3 id="text-utilities">Text Utilities</h3><pre><code class="language-css">/* Alignment */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Colors */
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+
+/* Weights */
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+</code></pre>
+<h2 id="design-patterns">🎨 Design Patterns</h2><h3 id="social-media-patterns">Social Media Patterns</h3><ul>
+<li><strong>User Links</strong>: Bold font weight (700) with hover underline</li>
+<li><strong>Timestamps</strong>: Secondary text color with small font size (0.875rem)</li>
+<li><strong>Like Buttons</strong>: Transparent background, colored when active</li>
+<li><strong>Follow Buttons</strong>: Primary color, inverted when following</li>
+</ul>
+<h3 id="content-hierarchy">Content Hierarchy</h3><ul>
+<li><strong>Post Content</strong>: Pre-wrap white-space for proper line breaks</li>
+<li><strong>Character Counts</strong>: Right-aligned, secondary text color</li>
+<li><strong>Error Messages</strong>: Light red background with error color text</li>
+<li><strong>Loading States</strong>: Centered text with secondary color</li>
+</ul>
+<h3 id="interactive-states">Interactive States</h3><ul>
+<li><strong>Hover Effects</strong>: Darker shades of primary colors</li>
+<li><strong>Disabled States</strong>: Light purple for disabled buttons</li>
+<li><strong>Focus States</strong>: Browser default focus indicators</li>
+<li><strong>Active States</strong>: Color changes for liked/followed items</li>
+</ul>
+<h2 id="implementation-guidelines">🔄 Implementation Guidelines</h2><h3 id="development-workflow">Development Workflow</h3><ul>
+<li><strong>CSS Variables</strong>: Use CSS custom properties for consistent theming</li>
+<li><strong>Component-First</strong>: Build reusable components with consistent styling</li>
+<li><strong>Mobile-First</strong>: Start with mobile styles, enhance for larger screens</li>
+<li><strong>Performance</strong>: Minimize CSS bundle size, use efficient selectors</li>
+</ul>
+<h3 id="accessibility-considerations">Accessibility Considerations</h3><ul>
+<li><strong>Color Contrast</strong>: Ensure sufficient contrast ratios for text</li>
+<li><strong>Touch Targets</strong>: Minimum 44px for interactive elements</li>
+<li><strong>Focus Indicators</strong>: Maintain visible focus states for keyboard navigation</li>
+<li><strong>Semantic HTML</strong>: Use proper HTML elements for screen readers</li>
+</ul>
+<h3 id="browser-support">Browser Support</h3><ul>
+<li><strong>Modern Browsers</strong>: Target current versions of Chrome, Firefox, Safari, Edge</li>
+<li><strong>CSS Features</strong>: Use CSS Grid, Flexbox, CSS Variables</li>
+<li><strong>Fallbacks</strong>: Provide fallbacks for older browsers where necessary</li>
+</ul>
+<hr>
+<p><strong>Design Language Version</strong>: 1.0<br><strong>Last Updated</strong>: 2025-01-27<br><strong>Status</strong>: Active and Implemented</p>
+<footer>Beginner workshop companion · Read tool activity and check results before marking a task complete.</footer></main></div><script>
+document.querySelectorAll('table').forEach(table=>{const wrap=document.createElement('div');wrap.className='tables';table.before(wrap);wrap.append(table)});
+document.querySelectorAll('pre').forEach(pre=>{const button=document.createElement('button');button.type='button';button.className='copy';button.textContent='Copy';button.setAttribute('aria-label','Copy this example');button.addEventListener('click',async()=>{const code=pre.querySelector('code');try{await navigator.clipboard.writeText(code.textContent);button.textContent='Copied';setTimeout(()=>button.textContent='Copy',1800)}catch{const range=document.createRange();range.selectNodeContents(code);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);button.textContent='Press Ctrl/Cmd+C'}});pre.append(button)});
+document.getElementById('print').addEventListener('click',()=>window.print());
+</script></body></html>
