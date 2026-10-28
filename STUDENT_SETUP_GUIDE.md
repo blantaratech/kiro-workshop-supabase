@@ -4,13 +4,11 @@ You will run a small social-posting app on your laptop and connect it to your ow
 
 Allow **45–60 minutes for a first setup**, depending on downloads and account creation. This is a planning estimate. Keep this guide open while you work.
 
-## Start here: use the Supabase edition
+## Start here: get the project from GitHub
 
-Download the kit from **[tinyurl.com/kiro-demo-startupkit](https://tinyurl.com/kiro-demo-startupkit)** when your facilitator tells you it is ready.
+Use the **[kiro-workshop-supabase repository](https://github.com/blantaratech/kiro-workshop-supabase)** for this workshop. Step 3 shows you how to clone it to your laptop.
 
-**Check the extracted files before continuing.** The folder you open must contain `supabase/schema.sql`, `frontend/`, and this guide. The Supabase edition is packaged as `Kiro_Supabase_Startup_Kit.zip`, containing a folder named `kiro-workshop-supabase`.
-
-If the download instead contains AWS deployment scripts, `backend/` and `infrastructure/`, ask your facilitator for the updated **Supabase edition**. That is the original AWS kit and these connection steps will not work with it. The ZIP's display name may stay `kiro-workshop-assets.zip` after the facilitator replaces the download; check its contents.
+The frontend runs locally on your laptop. **Supabase is the backend**: it provides login, the database and access rules. You will configure it through the Supabase dashboard.
 
 ## What runs where?
 
@@ -25,6 +23,7 @@ Kiro + Node.js + the web app  ────►  Login service + database + access
 | Backend | The cloud services that handle login and save data |
 | Node.js | Software that runs the app's local development tools |
 | npm | The tool installed with Node.js that downloads the app's required packages |
+| Git | The tool used to clone the project from GitHub to your laptop |
 | Terminal | A command box where you enter the commands in this guide |
 | Supabase project | Your own cloud database and login service |
 | SQL | Instructions that create the database tables and access rules |
@@ -39,9 +38,9 @@ Have these ready:
 - A Windows, macOS or Linux laptop with internet access and permission to install software.
 - A modern browser, such as Chrome, Edge or Firefox.
 - An account for signing in to Kiro and an account for the Supabase dashboard.
-- The **Supabase edition** of the startup kit.
+- Access to the [workshop repository on GitHub](https://github.com/blantaratech/kiro-workshop-supabase).
 
-You do not need an AWS account, AWS CLI, Docker, a local database, or a Supabase CLI installation for these steps.
+The steps below install Kiro, Node.js and Git, then set up your Supabase project in the browser.
 
 ### Keep the three sign-ins clear
 
@@ -57,24 +56,26 @@ They are separate accounts. Use a new password for the workshop app, rather than
 
 1. Open [kiro.dev/downloads](https://kiro.dev/downloads/).
 2. Download **Kiro IDE** for your operating system and run the installer.
-3. Open Kiro. Choose an available sign-in method, such as Google, GitHub or AWS Builder ID.
+3. Open Kiro and follow its sign-in prompts.
 4. Finish the sign-in in your browser, then return to Kiro.
 5. Importing settings from another editor is optional. You can skip it.
 
 **Check:** Kiro opens and you can reach its welcome screen. If you already installed it, continue.
 
-## Step 2 — Install Node.js 24
+## Step 2 — Install Node.js 24 and Git
 
 1. Open the [official Node.js download page](https://nodejs.org/en/download).
 2. Install **Node.js 24.x**, including npm. If the page offers a different major version, select version 24 from the version choices or [version 24 archive](https://nodejs.org/en/download/archive/v24).
-3. Close and reopen Kiro after installation so its terminal can find Node.js.
-4. In Kiro, select **Terminal → New Terminal**.
+3. Open the [official Git installation page](https://git-scm.com/install/), choose your operating system and follow its installation instructions. On Windows, keep Git available from the command line when the installer offers that choice.
+4. Close and reopen Kiro after installation so its terminal can find Node.js and Git.
+5. In Kiro, select **Terminal → New Terminal**.
 
 On **Windows PowerShell**, enter these commands one at a time:
 
 ```powershell
 node --version
 npm.cmd --version
+git --version
 ```
 
 On **macOS or Linux**:
@@ -82,19 +83,38 @@ On **macOS or Linux**:
 ```bash
 node --version
 npm --version
+git --version
 ```
 
-**Check:** Node prints a version beginning with `v24.` and npm prints a version number. The kit was checked locally using Node.js 24.19.0 and npm 11.17.0. You do not need those exact patch versions, but use major version 24 for this workshop.
+**Check:** Node prints a version beginning with `v24.`, npm prints a version number, and Git prints `git version ...`. The kit was checked locally using Node.js 24.19.0 and npm 11.17.0. You do not need those exact patch versions, but use major version 24 for this workshop.
 
 If a command is not recognised, see troubleshooting before continuing. On Windows, use `npm.cmd` throughout this guide to avoid PowerShell script-policy issues.
 
-## Step 3 — Download and extract the kit
+## Step 3 — Clone the project from GitHub
 
-1. Open **[the startup-kit download link](https://tinyurl.com/kiro-demo-startupkit)**.
-2. Choose **Download** in the file page. A ZIP file may not have a browser preview; download it instead of trying to edit it online.
-3. Create a personal folder called `KiroWorkshop` on your laptop, outside the ZIP file.
-4. Extract the ZIP there. On Windows, right-click it and choose **Extract All**. On macOS, double-click it and move the extracted folder into `KiroWorkshop`.
-5. Open the extracted folder and look for this structure:
+Cloning creates a local copy of the project files. In Kiro's terminal, go to a personal folder where you keep projects, then enter these commands one at a time.
+
+Windows PowerShell:
+
+```powershell
+mkdir KiroWorkshop
+cd KiroWorkshop
+git clone https://github.com/blantaratech/kiro-workshop-supabase.git
+cd kiro-workshop-supabase
+```
+
+macOS/Linux:
+
+```bash
+mkdir -p KiroWorkshop
+cd KiroWorkshop
+git clone https://github.com/blantaratech/kiro-workshop-supabase.git
+cd kiro-workshop-supabase
+```
+
+If `KiroWorkshop` already exists, skip its creation and use `cd KiroWorkshop` from its parent folder. Wait for cloning to finish before entering the last command. If you already cloned this repository, use that folder and continue to Step 4.
+
+Your cloned project should contain:
 
 ```text
 kiro-workshop-supabase/
@@ -111,7 +131,7 @@ kiro-workshop-supabase/
 
 Other folders, such as `tests/`, are included too. They do not need to be opened for setup.
 
-**Check:** You can see `package.json`, `frontend` and `supabase` together. Work in the extracted folder, not inside the compressed ZIP.
+**Check:** Cloning finishes without a fatal error, and the `kiro-workshop-supabase` folder contains `package.json`, `frontend` and `supabase`. You will configure your own Supabase connection in Step 9.
 
 ## Step 4 — Open the correct folder in Kiro
 
@@ -214,7 +234,7 @@ Both addresses refer to your own laptop. This setting matters when the app uses 
 1. In your Supabase project, open **Connect** and find the frontend/client connection details. The same values are also available in the project's API settings.
 2. Copy your **Project URL** and **Publishable key**. A new publishable key starts with `sb_publishable_`. Older projects may show a browser-safe legacy `anon` key instead; the kit accepts that too.
 3. In Kiro, check whether `frontend/.env.local` already exists. If you have already configured it, open it and review its values instead of overwriting it.
-4. On a fresh extraction, copy the template using the terminal:
+4. On a fresh clone, copy the template using the terminal:
 
 Windows PowerShell:
 
@@ -375,13 +395,14 @@ After the course, follow your facilitator's instructions about keeping or removi
 
 | What you see | What to do |
 | --- | --- |
-| The download asks for access | Ask the facilitator to check the sharing settings or send the correct ZIP. Do not request another student's account password. |
-| The ZIP contains `backend/`, `infrastructure/` or AWS scripts | You have the AWS edition. Get the Supabase edition before continuing. |
+| `git` is not recognised or the command is not found | Complete the Git installation in Step 2, then close and reopen Kiro and its terminal. |
+| `git clone` reports “Repository not found” or asks for access | Check the exact repository URL in Step 3. Ask the facilitator to confirm your access if needed. Do not use another student's credentials. |
+| `git clone` says the destination folder already exists | If it contains this project, open it and continue to Step 4. Otherwise choose another parent folder; keep any existing work. |
 | `node` is not recognised | Finish the Node.js 24 installation, then close and reopen Kiro and its terminal. |
 | PowerShell says `npm.ps1` cannot be loaded | Use the guide's `npm.cmd` command. You do not need to change the computer's execution policy. |
 | `EBADENGINE` or an unsupported Node version | Run `node --version`. Install Node.js 24.x and reopen Kiro. |
 | `ENOENT`, missing `package.json` or no lockfile | Your terminal is probably in the wrong folder. Repeat Step 4 and locate the project root. |
-| `npm ci` says the lockfile and package file do not match | Get a fresh extraction of this edition or ask the facilitator for a corrected kit. Keep the error; do not delete the supplied lockfile as your first fix. |
+| `npm ci` says the lockfile and package file do not match | Keep the error and ask the facilitator to check the files. If advised, clone the repository into a separate folder, preserving your existing work and `.env.local`. Do not delete the supplied lockfile as your first fix. |
 | Package download fails, times out or has a certificate error | Check internet access and the university network's proxy requirements with the facilitator. Do not disable certificate checking. |
 | Port 5173 is already in use | Find the earlier terminal running your workshop app and stop it with Ctrl+C. Then start again. Ask for help if the port belongs to something else; do not stop all Node processes. |
 | Browser cannot open the local app | Check that `npm run dev` is still running. Use the exact URL from that terminal. |
@@ -404,8 +425,8 @@ Share the step number, the exact error, your operating system, and the output of
 
 ## Ready-for-workshop checklist
 
-- [ ] I extracted the Supabase edition and opened the correct root folder.
-- [ ] Kiro is signed in and Node.js 24 is available.
+- [ ] Git is available, I cloned the GitHub repository and opened its root folder.
+- [ ] Kiro is signed in and Node.js 24 and npm are available.
 - [ ] I created my own Free Supabase project.
 - [ ] The complete SQL ran and all four tables exist.
 - [ ] I chose the workshop email-confirmation setting before app signup.
@@ -418,6 +439,8 @@ Share the step number, the exact error, your operating system, and the output of
 ## Official help
 
 - [Kiro installation and sign-in](https://kiro.dev/docs/getting-started/installation/)
+- [Git installation](https://git-scm.com/install/)
+- [Cloning a GitHub repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - [Supabase with React](https://supabase.com/docs/guides/getting-started/quickstarts/reactjs)
 - [Supabase password login and email confirmation](https://supabase.com/docs/guides/auth/passwords)
 - [Supabase public and secret API keys](https://supabase.com/docs/guides/api/api-keys)
@@ -425,4 +448,4 @@ Share the step number, the exact error, your operating system, and the output of
 - [Supabase Auth rate limits](https://supabase.com/docs/guides/auth/rate-limits)
 - [Supabase Free-plan limits](https://supabase.com/pricing)
 
-Dashboard labels and plan allowances can change. This guide was checked against official documentation on 26 October 2026. The supplied browser tests simulate Supabase responses; the local database tests check SQL access rules. Your own cloud project's live signup and posting are verified by the manual checks above.
+Dashboard labels and plan allowances can change. The Supabase setup references were checked on 26 October 2026; the Git installation and cloning references were checked on 29 October 2026. The supplied browser tests simulate Supabase responses; the local database tests check SQL access rules. Your own cloud project's live signup and posting are verified by the manual checks above.
