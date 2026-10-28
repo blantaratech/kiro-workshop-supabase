@@ -34,7 +34,6 @@ The New Post Cancel button and real commenting remain workshop exercises. The ex
 | `tests/database.test.mjs` | Local Postgres-compatible access-rule tests |
 | `tests/domain.test.ts` | Configuration and behavior checks |
 | `tests/browser/` | Browser tests using simulated Supabase responses |
-| `docs/` | Facilitator notes and validation evidence |
 
 ## Developer checks
 
